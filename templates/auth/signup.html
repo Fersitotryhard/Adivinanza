@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | POTRO PATROL</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/auth/signup.css">
+
+</head>
+<body>
+    <div class="background-container">
+        <div class="account-container">
+            <div class="logo-pp"></div>
+            <div class="account-tittle">
+                <h1 id="tittle-menu">🐴 POTRO PATROL 🐾</h1>
+            </div>
+            <div class="account-content">
+                <h2 id="tittle">¡Bienvenido!</h2>
+                <p id="paragraph-1">Crea tu cuenta para comenzar</p>
+            </div>
+            <div class="account-input">
+                <label for="name-label">Nombre</label>
+                <input type="text" id="name" placeholder="Escribe tu nombre...">
+                <label for="name-label">Correo electrónico</label>
+                <input type="email" id="account" placeholder="Escribe tu correo...">
+                <label for="password-label">Contraseña</label>
+                <input type="password" id="password" placeholder="Escribe tu contraseña...">
+            </div>
+            <a href="{{ url_for('signin') }}" type="submit" id="btn-register" class="btn-account">¡Crear Cuenta!</a>
+            <div class="emoji-container">
+                <p>🐶</p>
+                <p>🚒</p>
+                <p>🚁</p>
+                <p>🚓</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/signup.js')}}"></script>
+</body>
+</html>

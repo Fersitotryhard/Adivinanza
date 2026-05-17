@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 4 | POTRO PATROL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/levels/level1.css">
+</head>
+<body>
+    <div class="background-container">
+        <div class="logo-pp"></div>
+        <div id="level">
+            <p id="level-tittle">Nivel 4</p>
+        </div>
+        <div id="user">
+            <p id="user-tittle">Jugador: <span id="user-name">Usuario</span></p>
+        </div>
+        <div class="game-container">
+            <div class="background-game">
+                <img src="/static/images/site/Chase.png" class="img-dog">
+                <div id="circule"></div>
+            </div>
+            <div class="track">
+                <h1 id="track-tittle"><span id="name-dog">🐾Chase </span>te da una pista:</h1>
+                <p id="track-p">Soy el animal más grande del mundo y vivo en el océano.</p>
+            </div>
+            <div class="answer-input">
+                <label for="answer-label">Tu respuesta:</label>
+                <input type="text" id="answer" placeholder="Escribe tu respuesta...">
+            </div>
+            <div class="score">
+                <p id="tittle">Intentos</p>
+                <p id="number">0</p>
+            </div>
+            <div class="buttons">
+                <a href="#" class="btn-check">Verificar Respuesta</a>
+                <a href="{{ url_for('home') }}" class="btn-exit">Salir</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let attempts = 0;
+        const maxAttempts = 3;
+        let total_attempts = parseInt(new URLSearchParams(window.location.search).get('attempts') || '0');
+
+        const userNameEl = document.getElementById('user-name');
+        if (userNameEl) userNameEl.textContent = '{{ current_user.name }}';
+
+        document.querySelector('.btn-check').addEventListener('click', async () => {
+            const answer = document.getElementById('answer').value.trim();
+
+            if (!answer) { alert('Escribe tu respuesta antes de continuar.'); return; }
+
+            const response = await fetch('/api/answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ level: 4, answer: answer, total_attempts: total_attempts })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert('¡Correcto! Pasando al siguiente nivel...');
+                window.location.href = '/level5?attempts=' + total_attempts;
+            } else {
+                attempts++;
+                total_attempts++;
+                document.getElementById('number').textContent = attempts;
+                if (attempts >= maxAttempts) {
+                    alert('¡Se acabaron tus intentos! El juego ha terminado.');
+                    window.location.href = '/home';
+                } else {
+                    alert(`Incorrecto. Te quedan ${maxAttempts - attempts} intento(s).`);
+                }
+            }
+        });
+    });
+</script>
+    </script>
+</body>
+</html>

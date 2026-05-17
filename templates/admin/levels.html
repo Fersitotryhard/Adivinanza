@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niveles | POTRO PATROL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/static/css/admin/levels.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">🏠 Inicio</a>
+            <a href="{{ url_for('admin_users') }}">👥 Usuarios</a>
+        </div>
+        <h1>⚙️ Configurar Niveles</h1>
+
+        <!-- Formulario para crear adivinanza -->
+        <div class="form-card">
+            <h2>Nueva Adivinanza</h2>
+            <label>Imagen (nombre del archivo en /static/images/site/)</label>
+            <input type="text" id="image" placeholder="Ej: Chase.png">
+            <label>Pista</label>
+            <textarea id="hint" rows="3" placeholder="Escribe la pista..."></textarea>
+            <label>Palabra secreta</label>
+            <input type="text" id="answer" placeholder="Ej: conejo">
+            <label>Nivel</label>
+            <select id="level">
+                <option value="1">Nivel 1</option>
+                <option value="2">Nivel 2</option>
+                <option value="3">Nivel 3</option>
+                <option value="4">Nivel 4</option>
+                <option value="5">Nivel 5</option>
+            </select>
+            <button class="btn-save" onclick="saveRiddle()">💾 Guardar Adivinanza</button>
+        </div>
+
+        <!-- Tabla de adivinanzas -->
+        <h2>Adivinanzas registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nivel</th>
+                    <th>Imagen</th>
+                    <th>Pista</th>
+                    <th>Respuesta</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for riddle in riddles %}
+                <tr>
+                    <td>{{ riddle.id }}</td>
+                    <td>{{ riddle.level }}</td>
+                    <td>{{ riddle.image }}</td>
+                    <td>{{ riddle.hint }}</td>
+                    <td>{{ riddle.answer }}</td>
+                    <td>
+                        {% if riddle.is_active %}
+                        <span class="badge-active">Activa</span>
+                        {% else %}
+                        <span class="badge-inactive">Inactiva</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not riddle.is_active %}
+                        <button class="btn-activate" onclick="activateRiddle({{ riddle.id }}, {{ riddle.level }})">Activar</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function saveRiddle() {
+            const image = document.getElementById('image').value.trim();
+            const hint = document.getElementById('hint').value.trim();
+            const answer = document.getElementById('answer').value.trim();
+            const level = document.getElementById('level').value;
+
+            if (!image || !hint || !answer) {
+                Swal.fire('Error', 'Todos los campos son requeridos.', 'error');
+                return;
+            }
+
+            const response = await fetch('/api/riddles', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image, hint, answer, level })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                Swal.fire('Listo', data.message, 'success').then(() => location.reload());
+            } else {
+                Swal.fire('Error', data.message, 'error');
+            }
+        }
+
+        async function activateRiddle(id, level) {
+            const response = await fetch('/api/riddles/activate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, level })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                Swal.fire('Listo', data.message, 'success').then(() => location.reload());
+            } else {
+                Swal.fire('Error', data.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

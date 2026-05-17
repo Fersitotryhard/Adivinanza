@@ -1,0 +1,253 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, 
+        #3077aa 0%,
+        #60ace3 60%,
+        #83dbfe 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    height: 100vh;
+}
+
+.logo-pp {
+    background-image: url('/static/images/site/Patrol-logo.png');
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 430px;
+    margin-top: 46px;
+}
+
+.game-tittle {
+    width: 430px;
+    height: 80px;
+    background-color: white;
+    border-radius: 25px;
+    border: 5px solid rgb(255, 137, 40);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    text-align: center;
+    padding: 15px 0;
+    font-family: "Outfit", sans-serif;
+    margin-bottom: 17px;
+}
+
+#tittle-menu {
+    color: #4a7df5;
+    font-size: 2.3rem;
+    margin-top: 0px;
+}
+
+#paragraph-1 {
+    color: rgb(255, 137, 40);
+    font-size: 1.4rem;
+    margin-top: -23px;
+}
+
+.winners-container {
+    width: 550px;
+    height: 510px;
+    background-color: aliceblue;
+    border-radius: 25px;
+    border: 5px solid rgb(255, 137, 40);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    margin-left: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.winners-container {
+    text-align: center;
+    font-family: "Outfit", sans-serif;
+    padding-top: 10px;
+}
+
+#winners-title {
+    color: #4a7df5;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+#winners-subtitle {
+    color: #888;
+    margin-top: 0;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+#winners-table {
+    margin: 0 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#winners-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#winners-table thead tr {
+    background-color: #4a7df5;
+    color: white;
+}
+
+#winners-table thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+#winners-table tbody tr {
+    border-bottom: 1px solid #e0e8ff;
+    color: #4a7df5;
+    background-color: white;
+}
+
+#winners-table tbody tr.first {
+    background-color: #fffde7;
+}
+
+#winners-table tbody td {
+    padding: 14px 16px;
+    font-size: 1.2rem;
+}
+
+.badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: #ff8c00;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.user {
+    display: flex;
+    padding-left: 22px;
+    padding-right: 22px;
+    width: auto;
+    height: 60px;
+    background-color: aliceblue;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    justify-content: center;
+}
+
+#gretting-1 {
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+}
+
+#gretting-2 {
+    font-family: "Outfit", sans-serif;
+    color: #4a7df5;
+    font-weight: bold;
+}
+
+#btn-play {
+    display: flex;
+    justify-content: center;
+    width: 200%;
+    padding: 19px;
+    border: 4px solid aliceblue;
+    background: linear-gradient(to right, 
+        #ff8c00 30%,
+        #ff6600 100%
+    );
+    color: white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    font-family: "Outfit", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    margin-left: -70px;
+    margin-top: 45px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#btn-play:hover {
+    background: linear-gradient(to right, 
+        #ff850c 10%,
+        #ff750b 23%,
+        #ea5e00 100%
+    );
+    transform: scale(1.03);
+}
+
+#btn-play:active {
+    transform: scale(0.97);
+}
+
+.emoji-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: -6px;
+    font-size: 3rem;
+}
+
+#emoji-1 { 
+    animation: float 2.5s ease-in-out infinite; 
+    animation-delay: 0s; 
+}
+
+#emoji-2 { 
+    animation: float 2.5s ease-in-out infinite; 
+    animation-delay: 0.2s; 
+}
+
+#emoji-3 { 
+    animation: float 2.5s ease-in-out infinite; 
+    animation-delay: 0.4s; 
+}
+
+#emoji-4 { 
+    animation: float 2.5s ease-in-out infinite; 
+    animation-delay: 0.6s; 
+}
+
+@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+#btn-logout {
+    color: white;
+    font-size: 1.2rem;
+    font-family: "Outfit", sans-serif;
+}

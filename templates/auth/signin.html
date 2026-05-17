@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | POTRO PATROL</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/auth/signin.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="background-container">
+        <div class="login-container">
+            <div class="logo-pp"></div>
+            <div class="login-tittle">
+                <h1 id="tittle-menu">🐴 POTRO PATROL 🐾</h1>
+            </div>
+            <div class="login-content">
+                <h2 id="tittle">¡Bienvenido!</h2>
+                <p id="paragraph-1">Inicia sesión para continuar</p>
+            </div>
+            <div class="login-input">
+                <label for="name-label">Correo electrónico</label>
+                <input type="email" id="account" placeholder="Escribe tu correo...">
+                <label for="password-label">Contraseña</label>
+                <input type="password" id="password" placeholder="Escribe tu contraseña...">
+            </div>
+            <a href="#" id="btn-login" class="btn-login">¡Iniciar Sesión!</a>
+            <div class="signup">
+                <p>¿No tienes una cuenta? <a href="{{ url_for('signup') }}" class="btn-signup">Regístrate aquí</a></p>
+            </div>
+            <div class="emoji-container">
+                <p>🐶</p>
+                <p>🚒</p>
+                <p>🚁</p>
+                <p>🚓</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/signin.js') }}"></script>
+</body>
+</html>

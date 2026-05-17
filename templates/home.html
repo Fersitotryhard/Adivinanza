@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | POTRO PATROL</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/home.css">
+
+</head>
+<body>
+    <div class="background-container">
+        <div class="menu-container">
+            <div class="logo-pp"></div>
+            <div class="game-tittle">
+                <h1 id="tittle-menu">🐴 POTRO PATROL 🐾</h1>
+                <p id="paragraph-1">Adivinanzas</p>
+            </div>
+            <div class="user">
+                <p id="gretting-1">¡Hola, <span id="gretting-2">{{ current_user.name }}</span>! 👋</p>
+            </div>
+            <div class="btn-container">
+                {% if current_user.role == 'player' %}
+                <a href="{{ url_for('level1') }}" id="btn-play">▶️ PLAY</a>
+                {% endif %}
+
+                <!-- Solo visible para administradores -->
+                {% if current_user.role == 'admin' %}
+                <a href="{{ url_for('admin_users') }}" id="btn-users">👥 Usuarios</a>
+                <a href="{{ url_for('admin_levels') }}" id="btn-users">⚙️ Niveles</a>
+                {% endif %}
+            </div>
+            <div class="emoji-container">
+                <p id="emoji-1">🌭</p>
+                <p id="emoji-2">🦴</p>
+                <p id="emoji-3">🥇</p>
+                <p id="emoji-4">🎮</p>
+            </div>
+            <a href="{{ url_for('logout') }}" id="btn-logout">Cerrar sesión</a>
+        </div>
+        <div class="winners-container">
+            <h1 id="winners-title">🏆 Top Ganadores</h1>
+            <p id="winners-subtitle">Ordenados por menos intentos</p>
+            <div id="winners-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jugador</th>
+                            <th>Intentos</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for winner in winners %}
+                        <tr {% if loop.index == 1 %}class="first"{% endif %}>
+                            <td>
+                                {% if loop.index == 1 %}🥇
+                                {% elif loop.index == 2 %}🥈
+                                {% elif loop.index == 3 %}🥉
+                                {% else %}{{ loop.index }}{% endif %}
+                            </td>
+                            <td>{{ winner.name }}</td>
+                            <td><span class="badge">{{ winner.total_attempts }}</span></td>
+                            <td>{{ winner.played_at }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% if winners|length == 0 %}
+                        <tr>
+                            <td colspan="4" style="text-align:center;">Sin ganadores aún</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

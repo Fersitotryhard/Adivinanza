@@ -1,0 +1,9 @@
+# Entorno virtual específico de este proyecto
+venvadivinanza/
+
+# Variables de entorno (¡Aquí están tus contraseñas y secretos!)
+.env
+
+# Archivos compilados temporales que Python genera automáticamente
+__pycache__/
+*.pyc
